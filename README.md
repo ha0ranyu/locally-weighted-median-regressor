@@ -46,20 +46,24 @@ y_pred = reg.predict(X_test)
 ## Mathematical Details
 
 Define the weighted median of a sorted sample $y_1, y_2, \ldots, y_n$ with positive weights $w_1, w_2, \ldots, w_n$ to be
-$$
+```math
 WM(y_1, y_2, \ldots, y_n; w_1, w_2, \ldots, w_n) = y_{\arg\min_j \sum_{i=1}^{j} w_i \ge \frac{\sum_{i=1}^{n} w_i}{2}}
-$$
+```
 In other words, the weighted median is the value of the observation $y_j$ the cumulative weight up to whose index first exceeds half of the total weight.
 
 For a new observation $x$, we calculate the weight associated with an observation in the training set $x_i$ as
-$$
+```math
 w_i(x) = \exp[-(\frac{x-x_i}{\theta})^2]
-$$
+```
 where $\theta > 0$ is a tunable hyperparameter.
 
 The LOWMER fitted with $x_1, x_2, \ldots, x_{n_{\text{train}}}$, $y_1, y_2, \ldots, y_{n_{\text{train}}}$ predicts the conditional median given $X=x$ to be
-$$
+```math
 M(x) = WM(y_1, y_2, \ldots, y_{n_{\text{train}}}; w_1(x), w_2(x), \ldots, w_{n_{\text{train}}}(x))
-$$
+```
 
 In practice, the optimal $\theta$ can be obtained by grid-search cross validation on the training set.
+
+## License
+
+This project is released under the MIT License.
