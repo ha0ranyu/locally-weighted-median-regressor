@@ -27,13 +27,17 @@ class LocallyWeightedMedianRegressor(BaseEstimator, RegressorMixin):
 
     Examples
     --------
-    >>> from myregressors import LocallyWeightedMedianRegressor
+    >>> from lowmer import LocallyWeightedMedianRegressor
     >>> import numpy as np
-    >>> X = np.arange(100).reshape(100, 1)
-    >>> y = np.zeros((100, ))
-    >>> regressor = LocallyWeightedMedianRegressor()
-    >>> regressor.fit(X, y)
-    LocallyWeightedMedianRegressor()
+    >>> n = 200
+    >>> X = np.random.normal(size=n)
+    >>> y = 0.5 * X + np.random.lognormal(size=n)
+    >>> X_train, X_test = X[:100], X[100:]
+    >>> y_train, y_test = y[:100], y[100:]
+    >>> X_train = X_train.reshape(-1, 1)
+    >>> X_test = X_test.reshape(-1, 1)
+    >>> reg = LocallyWeightedMedianRegressor().fit(X_train, y_train)
+    >>> y_pred = reg.predict(X_test)
     """
 
     # This is a dictionary allowing to define the type of parameters.
