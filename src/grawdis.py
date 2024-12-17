@@ -76,9 +76,12 @@ class Grawdis:
                 )[np.triu_indices(self.n_obs, 1)]
             )
         # Optimize the component weights
-        self.component_weights = self._get_component_weights(
-            component_distance_matrices
-        )
+        if self.n_features == 1:
+            self.component_weights = np.ndarray([1])
+        else:
+            self.component_weights = self._get_component_weights(
+                component_distance_matrices
+            )
         self.is_fitted = True
 
     def predict(self, X: np.ndarray) -> np.ndarray:
